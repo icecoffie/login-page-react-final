@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Register</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="./assets/react.svg" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="max-w-md mx-auto mt-16 p-8 bg-white rounded-lg shadow-lg">
+      <div class="flex justify-center mb-6">
+        <img src="./assets/mus.png" alt="Logo" class="w-20 h-18" />
+      </div>
+      <h1 class="text-3xl font-semibold text-center mb-6">Register</h1>
+      <form>
+        <div class="mb-4">
+          <label for="Name" class="block text-sm font-medium text-gray-700"
+            >Your Name</label
+          >
+          <input
+            type="text"
+            id="Name"
+            name="Name"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-700"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >E-mail Address</label
+          >
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="dob" class="block text-sm font-medium text-gray-700">
+            Birth Of Date
+          </label>
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4 relative">
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Password
+          </label>
+          <input
+            type="text"
+            id="password"
+            name="password"
+            class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 pr-10 font-mono tracking-widest"
+            required
+            oninput="maskPassword(this)"
+          />
+          <button
+            type="button"
+            onclick="togglePassword()"
+            class="absolute top-1/2 right-3 -translate-y-1/2 flex items-center text-gray-500"
+            tabindex="-1"
+          >
+            <svg
+              id="eyeIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <script>
+          let realPassword = "";
+          let isVisible = false;
+
+          function maskPassword(input) {
+            const current = input.value;
+            if (current.length < realPassword.length) {
+              realPassword = realPassword.slice(0, current.length);
+            } else {
+              realPassword += current.charAt(current.length - 1);
+            }
+
+            if (!isVisible) {
+              input.value =
+                "•".repeat(realPassword.length - 1) + realPassword.slice(-1);
+            }
+          }
+
+          function togglePassword() {
+            const input = document.getElementById("password");
+            const eyeIcon = document.getElementById("eyeIcon");
+
+            isVisible = !isVisible;
+            input.value = isVisible
+              ? realPassword
+              : "•".repeat(realPassword.length - 1) + realPassword.slice(-1);
+
+            eyeIcon.innerHTML = isVisible
+              ? `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.977 9.977 0 012.541-4.144m4.287-2.298A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.973 9.973 0 01-4.21 5.107M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+               <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18" />`
+              : `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+               <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>`;
+          }
+        </script>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+        >
+          Register
+        </button>
+        <br />
+        <p class="text-xs text-gray-500 mt-2">
+          By register, you agree to EkS-Commerce
+          <a href="#" class="text-[#053F8C] underline">Terms</a> &
+          <a href="#" class="text-[#053F8C] underline">Privacy Policy</a>.
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
